@@ -62,73 +62,37 @@ window.onload=function () {
 //内容
     let dls=document.querySelectorAll(".content .con-li1 dl");
     let dot=document.querySelectorAll(".content .con-li1 .dot .page1");
-    let left=document.querySelectorAll(".content .con-li1 .left")[0];
-    let right=document.querySelectorAll(".content .con-li1 .right")[0];
+    let left=document.querySelector(".content .con-li1 .left");
+    let right=document.querySelector(".content .con-li1 .right");
     let w=parseInt(getComputedStyle(dls[0]).width);
     let curent=0;
     let nexted=0;
-    // let flag=true;
-    dls[0].style.left=0+"px";
-    console.log(left);
+    banner_small(dls,dot,left,right,w,curent,nexted);
+    let dls1=document.querySelectorAll(".content .con-li2 dl");
+    let dot1=document.querySelectorAll(".content .con-li2 .dot .page1");
+    let left1=document.querySelector(".content .con-li2 .left");
+    let right1=document.querySelector(".content .con-li2 .right");
+    let w11=parseInt(getComputedStyle(dls1[0]).width);
+    let curent1=0;
+    let nexted1=0;
+    banner_small(dls1,dot1,left1,right1,w11,curent1,nexted1);
+    let dls2=document.querySelectorAll(".content .con-li3 dl");
+    let dot2=document.querySelectorAll(".content .con-li3 .dot .page1");
+    let left2=document.querySelector(".content .con-li3 .left");
+    let right2=document.querySelector(".content .con-li3 .right");
+    let w12=parseInt(getComputedStyle(dls2[0]).width);
+    let curent2=0;
+    let nexted2=0;
+    banner_small(dls2,dot2,left2,right2,w12,curent2,nexted2);
+    let dls3=document.querySelectorAll(".content .con-li4 dl");
+    let dot3=document.querySelectorAll(".content .con-li4 .dot .page1");
+    let left3=document.querySelector(".content .con-li4 .left");
+    let right3=document.querySelector(".content .con-li4 .right");
+    let w13=parseInt(getComputedStyle(dls3[0]).width);
+    let curent3=0;
+    let nexted3=0;
+    banner_small(dls3,dot3,left3,right3,w13,curent3,nexted3);
 
-    for(let i=0;i<dls.length;i++){
-        dot[i].onclick=function () {
-            if (i==curent){
-                return curent;
-            }
-            else if(curent<i){
-                dot[curent].classList.remove("active");
-                dot[i].classList.add("active");
-                dls[i].style.left=`${w}px`;
-                animate(dls[curent],{left:-w});
-                animate(dls[i],{left:0});
-            }
-            else if(curent>i){
-                dot[curent].classList.remove("active");
-                dot[i].classList.add("active");
-                dls[i].style.left=`${-w}px`;
-                animate(dls[curent],{left:w});
-                animate(dls[i],{left:0});
-            }
-            curent=nexted=i;
-        }
-
-    }
-    left.onclick=function () {
-
-        nexted--;
-        if(nexted==-1){
-            nexted=dls.length-1;
-        }
-        dls[nexted].style.left=`${-w}px`;
-        animate(dls[curent],{left:w});
-        animate(dls[nexted],{left:0});
-        dot[curent].classList.remove("active");
-        dot[nexted].classList.add("active");
-        curent=nexted;
-        if(flag==false){
-            return;
-        }
-        flag=false;
-    }
-    right.onclick=function () {
-        nexted++;
-        if(nexted==dls.length){
-            nexted=0;
-        }
-        dls[nexted].style.left=`${w}px`;
-        animate(dls[curent],{left:-w});
-        animate(dls[nexted],{left:0});
-        dot[curent].classList.remove("active");
-        dot[nexted].classList.add("active");
-        curent=nexted;
-
-        // if(flag==false){
-        //     return;
-        // }
-        // flag=false;
-
-    }
     //为你推荐
     let button=document.querySelectorAll(".stat");
     let milist=document.querySelector(".recomment .container");
@@ -180,13 +144,46 @@ window.onload=function () {
         li[i].onmouseover=function () {
             //让剩余子元素消失
             for(let j=0;j<li.length;j++){
-                son[j].style.width=0;
+                son[j].style.display="none";
             }
-            son[i].style.width=400+"px";
+            son[i].style.display="block";
         }
         li[i].onmouseout=function () {
-            son[i].style.width=0;
+            son[i].style.display="none";
         }
     }
 
+
+    //家电
+    let tabb=document.getElementsByClassName("tab-1")
+    let right4=document.querySelectorAll(".project1 .container .pro-1");
+    console.log(right4);
+    let num=0;
+    right4[0].style.display="block";
+    for(let i=0;i<tabb.length;i++){
+        tabb[i].onmouseover=function () {
+            for (let j=0;j<tabb.length;j++){
+                tabb[j].classList.remove("active");
+                right4[j].style.display="none";
+            }
+            tabb[i].classList.add("active");
+            right4[i].style.display="block";
+            num=i;
+        }
+    }
+
+    //二级导航下拉列表
+    let header=document.querySelectorAll(".site-header .header ul li");
+    let down=document.querySelectorAll(".site-header .header ul li .down");
+    console.log(down);
+    for(let i=0;i<header.length;i++){
+        header[i].onmouseover=function () {
+            header[i].classList.add("active");
+            down[i].style.height=200+"px";
+        }
+        header[i].onmouseleave=function () {
+            header[i].classList.add("active");
+            down[i].style.height=0;
+        }
+    }
 }

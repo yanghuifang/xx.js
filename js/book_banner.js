@@ -1,15 +1,9 @@
 
-Function banner_
+function banner_small(dls,dot,left,right,w,curent,nexted){
 
 
-let dls=document.querySelectorAll(".content .con-li1 dl");
-let dot=document.querySelectorAll(".content .con-li1 .dot .page1");
-let left=document.querySelector(".content .con-li1 .left");
-let right=document.querySelector(".content .con-li1 .right");
-let w=parseInt(getComputedStyle(dls[0]).width);
-let curent=0;
-let nexted=0;
-// let flag=true;
+
+let flag=true;
 dls[0].style.left=0+"px";
 console.log(left);
 
@@ -40,9 +34,10 @@ left.onclick=function () {
 
     nexted--;
     if(nexted==-1){
-        nexted=dls.length-1;
+        // nexted=dls.length-1;
+        return;
     }
-    dls[nexted].style.left=`${-w}px`;
+    dls[nexted].style.left=`$-{w}px`;
     animate(dls[curent],{left:w});
     animate(dls[nexted],{left:0});
     dot[curent].classList.remove("active");
@@ -56,7 +51,8 @@ left.onclick=function () {
 right.onclick=function () {
     nexted++;
     if(nexted==dls.length){
-        nexted=0;
+        // nexted=0;
+        return;
     }
     dls[nexted].style.left=`${w}px`;
     animate(dls[curent],{left:-w});
@@ -65,9 +61,10 @@ right.onclick=function () {
     dot[nexted].classList.add("active");
     curent=nexted;
 
-    // if(flag==false){
-    //     return;
-    // }
-    // flag=false;
+    if(flag==false){
+        return;
+    }
+    flag=false;
 
+}
 }
