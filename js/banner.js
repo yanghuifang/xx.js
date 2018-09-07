@@ -173,17 +173,46 @@ window.onload=function () {
     }
 
     //二级导航下拉列表
+
     let header=document.querySelectorAll(".site-header .header ul li");
     let down=document.querySelectorAll(".site-header .header ul li .down");
     console.log(down);
     for(let i=0;i<header.length;i++){
         header[i].onmouseover=function () {
+            for(let j=0;j<header.length;j++){
+                down[j].style.height=240+"px";
+                down[j].style.zIndex=1;
+            }
             header[i].classList.add("active");
-            down[i].style.height=200+"px";
+            down[i].style.zIndex=199;
+            down[i].style.borderTop="1px solid #aaaaaa";
         }
         header[i].onmouseleave=function () {
-            header[i].classList.add("active");
-            down[i].style.height=0;
+            for(let j=0;j<header.length;j++){
+                down[j].style.height=0;
+                down[j].style.borderTop="none";
+            }
+            // header[i].classList.add("active");
+            // down[i].style.height=0;
+            // down[i].style.borderTop="none";
         }
+    }
+    //返回顶部
+
+    let back=document.querySelector(".back-box");
+    // back.style.display="none";
+
+    window.onscroll=function () {
+        let bh=document.documentElement.scrollTop;
+        if(bh>800){
+            back.style.display="block";
+        }else{
+            back.style.display="none";
+        }
+    }
+
+    back.onclick=function () {
+        animate(document.documentElement,{scrollTop:0},500);
+        // document.documentElement.scrollTop=0;
     }
 }
